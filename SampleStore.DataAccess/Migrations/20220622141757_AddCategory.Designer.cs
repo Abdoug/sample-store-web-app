@@ -5,26 +5,26 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleStoreWebApp.Data;
+using SampleStore.DataAccess;
 
 #nullable disable
 
-namespace SampleStoreWebApp.Migrations
+namespace SampleStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220613125324_AddProductToDatabase")]
-    partial class AddProductToDatabase
+    [Migration("20220622141757_AddCategory")]
+    partial class AddCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SampleStoreWebApp.Models.Product", b =>
+            modelBuilder.Entity("SampleStore.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,16 +35,16 @@ namespace SampleStoreWebApp.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Qty")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Categories");
                 });
 #pragma warning restore 612, 618
         }

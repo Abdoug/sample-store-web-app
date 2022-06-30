@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SampleStoreWebApp.Data;
-using SampleStoreWebApp.Models;
+using SampleStore.DataAccess;
+using SampleStore.DataAccess.Repository.IRepository;
+using SampleStore.Models;
 
-namespace SampleStoreWebApp.Controllers
+namespace SampleStoreWebApp.Areas.Admin.Controllers
 {
-    public class ProductController :Controller
-    {
-        private readonly ApplicationDbContext _db;
 
-        public ProductController(ApplicationDbContext db)
+    [Area("Admin")]
+    public class CategoryController : Controller
+    {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> ProductsList = _db.Products;
+            IEnumerable<Category> CategoriesList = _unitOfWork.Category.GetAll();
 
-            return View(ProductsList);
+            return View(CategoriesList);
         }
 
         public IActionResult Create()
@@ -27,13 +30,13 @@ namespace SampleStoreWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product)
+        public IActionResult Create(Category category)
         {
             // Begin Validation
             if (ModelState.IsValid)
             {
-                _db.Products.Add(product);
-                _db.SaveChanges();
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Save();
 
                 TempData["success"] = "The entry has been created succesfully";
 
@@ -42,7 +45,7 @@ namespace SampleStoreWebApp.Controllers
 
             TempData["error"] = "The entry has not been created succesfully";
 
-            return View(product);
+            return View(category);
         }
 
         public IActionResult Edit(int? id)
@@ -52,20 +55,20 @@ namespace SampleStoreWebApp.Controllers
                 return NotFound();
             }
 
-            var productFromDb = _db.Products.Find(id);
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id);
 
-            return View(productFromDb);
+            return View(categoryFromDb);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(Category category)
         {
             // Begin Validation
             if (ModelState.IsValid)
             {
-                _db.Products.Update(product);
-                _db.SaveChanges();
+                _unitOfWork.Category.Update(category);
+                _unitOfWork.Save();
 
                 TempData["success"] = "The entry has been updated succesfully";
 
@@ -74,7 +77,7 @@ namespace SampleStoreWebApp.Controllers
 
             TempData["error"] = "The entry has not been updated succesfully";
 
-            return View(product);
+            return View(category);
         }
         public IActionResult Delete(int? id)
         {
@@ -83,24 +86,24 @@ namespace SampleStoreWebApp.Controllers
                 return NotFound();
             }
 
-            var productFromDb = _db.Products.Find(id);
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id);
 
-            return View(productFromDb);
+            return View(categoryFromDb);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var productToBeDeleted = _db.Products.Find(id);
+            var categoryToBeDeleted = _unitOfWork.Category.GetFirstOrDefault(x => x.Id == id);
 
-            if (productToBeDeleted == null)
+            if (categoryToBeDeleted == null)
             {
                 return NotFound();
             }
 
-            _db.Products.Remove(productToBeDeleted);
-            _db.SaveChanges();
+            _unitOfWork.Category.Remove(categoryToBeDeleted);
+            _unitOfWork.Save();
 
             TempData["success"] = "The entry has been deleted succesfully";
 

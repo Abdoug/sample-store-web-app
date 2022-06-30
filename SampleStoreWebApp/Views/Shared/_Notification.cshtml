@@ -1,12 +1,13 @@
 ﻿@if (TempData["success"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script type="text/javascript">
         toastr.success('@TempData["success"]', null, { timeOut: 5000, positionClass: "toast-bottom-right" });
     </script>
 
-    <h4 class="p-3 mt-5 rounded-1 bg-success">@TempData["success"]</h4>
-}
+@*    <h4 class="p-3 mt-5 rounded-1 bg-success">@TempData["success"]</h4>
+*@}
 @if (TempData["error"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -15,6 +16,6 @@
         toastr.success('@TempData["error"]', null, { timeOut: 5000, positionClass: "toast-bottom-right" });
     </script>
 
-    <h4 class="p-3 mt-5 rounded-1 bg-danger">@TempData["error"]</h4>
-}
+@*    <h4 class="p-3 mt-5 rounded-1 bg-danger">@TempData["error"]</h4>
+*@}
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SampleStoreWebApp.Models;
+using SampleStore.Models;
 
-namespace SampleStoreWebApp.Data
+namespace SampleStore.DataAccess
 {
     public class ApplicationDbContext :DbContext
     {
@@ -9,6 +9,8 @@ namespace SampleStoreWebApp.Data
         {
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<CoverType> CoverTypes { get; set; }
     }
 }

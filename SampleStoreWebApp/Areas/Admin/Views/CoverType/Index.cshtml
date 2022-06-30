@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CoverType>
+@{
+    ViewData["Title"] = "Cover Types";
+}
+
+<partial name="_Notification" />
+
+<div class="container py-3 mt-3">
+    <div class="row">
+        <div class="col-6 px-0">
+            <h3 class="text-warning">List of Cover Types</h3>
+        </div>
+        <div class="col-6 px-0 text-end">
+            <a asp-controller="CoverType" asp-action="Create" class="btn btn-warning">
+                <i class="bg-warning bi-plus-circle"></i> &nbsp;
+                Add New Cover Type
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                Cover Type Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model) {
+            <tr>
+                <td width="50%">
+                    @obj.Name
+                </td>
+                <td>
+                    <div class="w-150 btn-group" role="group">
+                        <a class="btn btn-primary mx-2" asp-controller="CoverType" asp-action="Edit" asp-route-id="@obj.Id">
+                            <i class="bg-info bi-pencil-square"></i>&nbsp;Edit
+                        </a>
+                        <a class="btn btn-danger mx-2" asp-controller="CoverType" asp-action="Delete" asp-route-id="@obj.Id">
+                            <i class="bg-danger bi-trash-fill"></i>&nbsp;Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

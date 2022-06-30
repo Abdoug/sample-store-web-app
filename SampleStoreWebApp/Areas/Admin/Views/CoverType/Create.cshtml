@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model CoverType
 @{
     ViewData["Title"] = "Create";
 }
@@ -6,20 +6,15 @@
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Product</h2>
+            <h2 class="text-primary">Create Cover Type</h2>
         </div>
         <div class="mb-3">
-            <label asp-for="Name"></label>
+            <label asp-for="Name">Name</label>
             <input asp-for="Name" class="form-control"/>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="Qty"></label>
-            <input asp-for="Qty" class="form-control"/>
-            <span asp-validation-for="Qty" class="text-danger"></span>
-        </div>
         <div class="justify-content-end text-end">
-            <button type="submit" class="btn btn-primary" style="width: 150px">Submit</button>
+            <button type="submit" class="btn btn-primary" style="width: 150px;">Submit</button>
             <a asp-controller="Home" asp-action="Index" class="btn btn-danger" style="width: 150px">Back Home</a>
         </div>
     </div>
@@ -27,6 +22,6 @@
 
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial"/>
     }
 }

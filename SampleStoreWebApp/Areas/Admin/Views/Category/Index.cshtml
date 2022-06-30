@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<Category>
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Categories";
 }
 
 <partial name="_Notification" />
@@ -8,12 +8,12 @@
 <div class="container py-3 mt-3">
     <div class="row">
         <div class="col-6 px-0">
-            <h3 class="text-warning">List of the products</h3>
+            <h3 class="text-warning">List of the categories</h3>
         </div>
         <div class="col-6 px-0 text-end">
-            <a asp-controller="Product" asp-action="Create" class="btn btn-warning">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-warning">
                 <i class="bg-warning bi-plus-circle"></i> &nbsp;
-                Add New Product
+                Add New Category
             </a>
         </div>
     </div>
@@ -23,10 +23,10 @@
     <thead>
         <tr>
             <th>
-                Product Name
+                Category Name
             </th>
             <th>
-                Product Qty
+                Category Display Order
             </th>
             <th></th>
         </tr>
@@ -38,14 +38,14 @@
                     @obj.Name
                 </td>
                 <td width="30%">
-                    @obj.Qty
+                    @obj.DisplayOrder
                 </td>
                 <td>
                     <div class="w-150 btn-group" role="group">
-                        <a class="btn btn-primary mx-2" asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id">
+                        <a class="btn btn-primary mx-2" asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id">
                             <i class="bg-info bi-pencil-square"></i>&nbsp;Edit
                         </a>
-                        <a class="btn btn-danger mx-2" asp-controller="Product" asp-action="Delete" asp-route-id="@obj.Id">
+                        <a class="btn btn-danger mx-2" asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id">
                             <i class="bg-danger bi-trash-fill"></i>&nbsp;Delete
                         </a>
                     </div>
