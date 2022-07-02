@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<partial name="_Notification" />
+
+<div class="container py-3 mt-3">
+    <div class="row">
+        <div class="col-6 px-0">
+            <h3 class="text-warning">List of the products</h3>
+        </div>
+        <div class="col-6 px-0 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-warning">
+                <i class="bg-warning bi-plus-circle"></i> &nbsp;
+                Add New Product
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                ListPrice
+            <th>
+                Price
+            <th>
+                Price 50
+            </th>
+            <th>
+                Price100
+            </th>
+            <th>
+                Image Url
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Cover Type
+            </th>
+        </tr>
+    </thead>
+</table>
