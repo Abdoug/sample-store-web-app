@@ -1,8 +1,29 @@
-﻿@{
+﻿@using SampleStore.Models
+@model IEnumerable<Product>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center mt-5">
-    <h1 class="display-4">Hey, Welcome!</h1>
-    <p>This is just a sample CRUD website built with .Net Core 6 for learning purpose.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                          <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-title">@item.Author</p>
+                            <p class="card-text">List Price: <strike><b>@item.ListPrice.ToString("0.00")</b></strike></p>
+                            <p class="card-text">As low as: <b>@item.Price100.ToString("0.00")</b></p>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary w-100">Details</a>
+                          </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

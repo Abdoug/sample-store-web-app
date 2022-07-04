@@ -3,6 +3,17 @@
     ViewData["Title"] = "Products";
 }
 
+@section Styles {
+    @*<style>
+        .dataTables_wrapper label,
+        .dataTables_wrapper input,
+        .dataTables_info,
+        .dataTables_paginate {
+            color: aliceblue !important;
+        }
+    </style>*@
+}
+
 <partial name="_Notification" />
 
 <div class="container py-3 mt-3">
@@ -19,43 +30,31 @@
     </div>
 </div>
 
-<table class="table table-bordered table-striped" style="width: 100%">
+<table id="productsTable" class="table table-bordered table-striped text-white-50" style="width: 100%">
     <thead>
         <tr>
             <th>
-                Name
-            </th>
-            <th>
                 Title
-            </th>
-            <th>
-                Description
             </th>
             <th>
                 ISBN
             </th>
             <th>
-                Author
-            </th>
-            <th>
-                ListPrice
-            <th>
                 Price
-            <th>
-                Price 50
             </th>
             <th>
-                Price100
-            </th>
-            <th>
-                Image Url
+                Author
             </th>
             <th>
                 Category
             </th>
             <th>
-                Cover Type
+                Actions
             </th>
         </tr>
     </thead>
 </table>
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}

@@ -25,18 +25,32 @@ namespace SampleStore.DataAccess.Repository
             dbSet.Add(item);
         }
 
-        public IEnumerable<T> GetAll()
+        private IQueryable _IncludeProperties(IQueryable<T> query, string? includeProperties = null)
         {
-            IEnumerable<T> query = dbSet;
+            foreach (string property in includeProperties.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+
+            return query;
+        }
+
+        public IEnumerable<T> GetAll(string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+
+            if (includeProperties != null) query = _IncludeProperties(query, includeProperties) as IQueryable<T>;
 
             return query.ToList();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
             query = query.Where(filter);
+
+            if (includeProperties != null) query = _IncludeProperties(query, includeProperties) as IQueryable<T>;
 
             return query.FirstOrDefault();
         }
